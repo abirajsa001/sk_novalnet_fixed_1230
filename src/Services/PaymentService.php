@@ -495,6 +495,9 @@ public function allowedCountries(Basket $basket, $allowedCountry): bool
     public function performServerCall()
     {
         $paymentRequestData = $this->sessionStorage->getPlugin()->getValue('nnPaymentData');
+        $this->getLogger(__METHOD__)->error('getdata', [
+            '$mjjjm' =>$paymentRequestData['paymentRequestData'],                               
+        ]);
         $paymentKey = $this->paymentHelper->getPaymentKey($paymentRequestData['paymentRequestData']['transaction']['payment_type']);
         $nnDoRedirect = $this->sessionStorage->getPlugin()->getValue('nnDoRedirect');
         $nnGooglePayDoRedirect = $this->sessionStorage->getPlugin()->getValue('nnGooglePayDoRedirect');
@@ -522,10 +525,6 @@ public function allowedCountries(Basket $basket, $allowedCountry): bool
                 return $this->response->redirectTo($this->sessionStorage->getLocaleSettings()->language . '/confirmation');
             }
         }
-
-        $this->getLogger(__METHOD__)->error('getprocess', [
-            '$mmm' =>$paymentRequestData['paymentRequestData'],                               
-        ]);
         $privateKey = $this->settingsService->getPaymentSettingsValue('novalnet_private_key');
         $paymentResponseData = $this->paymentHelper->executeCurl($paymentRequestData['paymentRequestData'], $paymentRequestData['paymentUrl'], $privateKey);
         $isPaymentSuccess = isset($paymentResponseData['result']['status']) && $paymentResponseData['result']['status'] == 'SUCCESS';
