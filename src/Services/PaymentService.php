@@ -319,17 +319,7 @@ public function allowedCountries(Basket $basket, $allowedCountry): bool
             $paymentRequestData['transaction']['amount'] = 0;
         }
 
-        $this->getLogger(__METHOD__)->error('currency', [
-            '$nn' =>  $this->sessionStorage->getPlugin()->getValue('orderCurrency'),                               
-        ]);
-
-        $this->getLogger(__METHOD__)->error('currency1', [
-            '$nq' =>  $basket->currency,                               
-        ]);
-
-        $this->getLogger(__METHOD__)->error('requestdata', [
-            '$requestdata' =>    $paymentRequestData['transaction'],                               
-        ]);
+      
         // Send due date to the Novalnet server if it configured
         if(in_array($paymentKey, ['NOVALNET_INVOICE', 'NOVALNET_PREPAYMENT', 'NOVALNET_SEPA'])) {
             $dueDate = $this->settingsService->getPaymentSettingsValue('due_date', $paymentKeyLower);
@@ -532,6 +522,10 @@ public function allowedCountries(Basket $basket, $allowedCountry): bool
                 return $this->response->redirectTo($this->sessionStorage->getLocaleSettings()->language . '/confirmation');
             }
         }
+
+        $this->getLogger(__METHOD__)->error('getprocess', [
+            '$mmm' =>$paymentRequestData['paymentRequestData'],                               
+        ]);
         $privateKey = $this->settingsService->getPaymentSettingsValue('novalnet_private_key');
         $paymentResponseData = $this->paymentHelper->executeCurl($paymentRequestData['paymentRequestData'], $paymentRequestData['paymentUrl'], $privateKey);
         $isPaymentSuccess = isset($paymentResponseData['result']['status']) && $paymentResponseData['result']['status'] == 'SUCCESS';
