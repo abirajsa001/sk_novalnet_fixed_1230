@@ -1081,6 +1081,10 @@ public function allowedCountries(Basket $basket, $allowedCountry): bool
                 $transactionComments .= PHP_EOL . $this->paymentHelper->getTranslatedText('sepa_pending_payment_text');
             }
         }
+        $this->getLogger(__METHOD__)->error('getprocessPayment', [
+            '$path' => $transactionData,                               
+        ]);
+
         // Form the bank details for invoice payments
         if (in_array($transactionData['paymentName'],['novalnet_invoice','novalnet_prepayment','novalnet_guaranteed_invoice','novalnet_instalment_invoice'],true) && !in_array( $transactionData['tx_status'],['DEACTIVATED', 'FAILURE', 'PENDING'],true) && !isset($transactionData['prepaid']) && !isset($transactionData['bookingText']) ) {
             $transactionComments .= PHP_EOL . $this->getBankDetailsInformation($transactionData);
