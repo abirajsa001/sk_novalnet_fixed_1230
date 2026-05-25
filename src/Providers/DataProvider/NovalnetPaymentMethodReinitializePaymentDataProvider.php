@@ -86,7 +86,7 @@ class NovalnetPaymentMethodReinitializePaymentDataProvider
                 // Set the payment request parameters into session
                 $sessionStorage->getPlugin()->setValue('nnPaymentData', $paymentRequestData);
 
-                // Get the Credit card form loading parameters
+                // Get the Credit card form loading parametersbasketRepository
                 if ($paymentKey == 'NOVALNET_CC') {
                      $ccFormDetails = $paymentService->getCreditCardAuthenticationCallData($basketRepository->load(), strtolower($paymentKey), $invoiceAmount);
                      $ccCustomFields = $paymentService->getCcFormFields();

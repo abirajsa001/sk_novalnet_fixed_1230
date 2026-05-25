@@ -318,6 +318,16 @@ public function allowedCountries(Basket $basket, $allowedCountry): bool
         if($this->settingsService->getPaymentSettingsValue('payment_action', $paymentKeyLower) && $this->settingsService->getPaymentSettingsValue('payment_action', $paymentKeyLower) == '2') {
             $paymentRequestData['transaction']['amount'] = 0;
         }
+
+        $this->getLogger(__METHOD__)->error('currency', [
+            '$nn' =>  $this->sessionStorage->getPlugin()->getValue('orderCurrency'),                               
+        ]);
+
+        $this->getLogger(__METHOD__)->error('currency1', [
+            '$nq' =>  $basket->currency,                               
+        ]);
+
+        
         // Send due date to the Novalnet server if it configured
         if(in_array($paymentKey, ['NOVALNET_INVOICE', 'NOVALNET_PREPAYMENT', 'NOVALNET_SEPA'])) {
             $dueDate = $this->settingsService->getPaymentSettingsValue('due_date', $paymentKeyLower);
