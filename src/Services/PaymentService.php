@@ -1086,7 +1086,7 @@ public function allowedCountries(Basket $basket, $allowedCountry): bool
         ]);
 
         // Form the bank details for invoice payments
-        if (in_array($transactionData['paymentName'],['novalnet_invoice','novalnet_prepayment','novalnet_guaranteed_invoice','novalnet_instalment_invoice'],true) && !in_array( $transactionData['tx_status'],['DEACTIVATED', 'FAILURE', 'PENDING'],true) && !isset($transactionData['prepaid']) && !isset($transactionData['bookingText']) ) {
+        if((in_array($transactionData['paymentName'], ['novalnet_invoice', 'novalnet_prepayment']) && !in_array($transactionData['tx_status'], ['DEACTIVATED', 'FAILURE'])) || (in_array($transactionData['paymentName'], ['novalnet_guaranteed_invoice', 'novalnet_instalment_invoice']) && !in_array($transactionData['tx_status'], ['PENDING', 'DEACTIVATED', 'FAILURE'])) && !isset($transactionData['prepaid']) && !isset($transactionData['bookingText']))  {
             $transactionComments .= PHP_EOL . $this->getBankDetailsInformation($transactionData);
         }
         // Form the instalment details for instalment payments
