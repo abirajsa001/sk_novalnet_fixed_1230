@@ -251,6 +251,9 @@ class NovalnetServiceProvider extends ServiceProvider
                         $contentType = 'htmlContent';
                     }
                 }
+                $this->getLogger(__METHOD__)->error('s4', [
+                    '$ss' =>$paymentRequestData,                               
+                ]);
                 $sessionStorage->getPlugin()->setValue('nnPaymentData', $paymentRequestData);
 
                 // If payment before order creation option was set as 'No' the payment will be created initially

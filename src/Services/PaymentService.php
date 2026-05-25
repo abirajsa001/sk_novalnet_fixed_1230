@@ -531,6 +531,9 @@ public function allowedCountries(Basket $basket, $allowedCountry): bool
         // Do redirect if the redirect URL is present
         if($this->isRedirectPayment($paymentKey) || !empty($nnDoRedirect) || (!empty($nnGooglePayDoRedirect) && (string) $nnGooglePayDoRedirect === 'true')) {
             // Set the payment response in the session for the further processings
+            $this->getLogger(__METHOD__)->error('s6', [
+                '$sssss' =>$paymentRequestData,                               
+            ]);
             $this->sessionStorage->getPlugin()->setValue('nnPaymentData', $paymentRequestData['paymentRequestData']);
             return $paymentResponseData;
         } else {
@@ -543,6 +546,9 @@ public function allowedCountries(Basket $basket, $allowedCountry): bool
                     }
                     $this->pushNotification($paymentResponseData['result']['status_text'], 'error', 100);
             }
+            $this->getLogger(__METHOD__)->error('s7', [
+                '$sss' =>$paymentRequestData,                               
+            ]);
             // Set the payment response in the session for the further processings
             $this->sessionStorage->getPlugin()->setValue('nnPaymentData', array_merge($paymentRequestData['paymentRequestData'], $paymentResponseData));
            // If payment before order creation option was set as 'Yes' handle the further process to the order based on the payment response
