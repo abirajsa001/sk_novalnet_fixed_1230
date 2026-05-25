@@ -327,7 +327,9 @@ public function allowedCountries(Basket $basket, $allowedCountry): bool
             '$nq' =>  $basket->currency,                               
         ]);
 
-        
+        $this->getLogger(__METHOD__)->error('requestdata', [
+            '$requestdata' =>    $paymentRequestData['transaction'],                               
+        ]);
         // Send due date to the Novalnet server if it configured
         if(in_array($paymentKey, ['NOVALNET_INVOICE', 'NOVALNET_PREPAYMENT', 'NOVALNET_SEPA'])) {
             $dueDate = $this->settingsService->getPaymentSettingsValue('due_date', $paymentKeyLower);
