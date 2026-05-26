@@ -531,8 +531,8 @@ public function allowedCountries(Basket $basket, $allowedCountry): bool
         // Do redirect if the redirect URL is present
         if($this->isRedirectPayment($paymentKey) || !empty($nnDoRedirect) || (!empty($nnGooglePayDoRedirect) && (string) $nnGooglePayDoRedirect === 'true')) {
             // Set the payment response in the session for the further processings
-            $this->getLogger(__METHOD__)->error('s6', [
-                '$value786' =>$paymentRequestData,                               
+            $this->getLogger(__METHOD__)->error('test5', [
+                '$test5' =>$paymentRequestData,                               
             ]);
             $this->sessionStorage->getPlugin()->setValue('nnPaymentData', $paymentRequestData['paymentRequestData']);
             return $paymentResponseData;
@@ -546,8 +546,8 @@ public function allowedCountries(Basket $basket, $allowedCountry): bool
                     }
                     $this->pushNotification($paymentResponseData['result']['status_text'], 'error', 100);
             }
-            $this->getLogger(__METHOD__)->error('s7', [
-                '$value432' =>$paymentRequestData,                               
+            $this->getLogger(__METHOD__)->error('test4', [
+                '$test4' =>$paymentRequestData,                               
             ]);
             // Set the payment response in the session for the further processings
             $this->sessionStorage->getPlugin()->setValue('nnPaymentData', array_merge($paymentRequestData['paymentRequestData'], $paymentResponseData));

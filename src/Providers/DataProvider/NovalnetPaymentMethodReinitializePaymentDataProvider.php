@@ -82,8 +82,8 @@ class NovalnetPaymentMethodReinitializePaymentDataProvider
 
                 // Build the payment request parameters
                 $paymentRequestData = $paymentService->generatePaymentParams($basketRepository->load(), $paymentKey, $invoiceAmount);
-                $this->getLogger(__METHOD__)->error('s5', [
-                    '$value123' =>$paymentRequestData,                               
+                $this->getLogger(__METHOD__)->error('test6', [
+                    '$test6' =>$paymentRequestData,                               
                 ]);
 
 

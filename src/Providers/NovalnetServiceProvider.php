@@ -251,8 +251,8 @@ class NovalnetServiceProvider extends ServiceProvider
                         $contentType = 'htmlContent';
                     }
                 }
-                $this->getLogger(__METHOD__)->error('s4', [
-                    '$ssssssssssssssssssssssssss' =>$paymentRequestData,                               
+                $this->getLogger(__METHOD__)->error('test7', [
+                    '$test7' =>$paymentRequestData,                               
                 ]);
                 $sessionStorage->getPlugin()->setValue('nnPaymentData', $paymentRequestData);
 

@@ -139,8 +139,8 @@ class PaymentController extends Controller
             $paymentRequestData = $this->sessionStorage->getPlugin()->getValue('nnPaymentData');
 
 
-            $this->getLogger(__METHOD__)->error('s1', [
-                '$ssssssssssssssssssss' =>$paymentRequestData,                               
+            $this->getLogger(__METHOD__)->error('test10', [
+                'test10' =>$paymentRequestData,                               
             ]);
 
             // Set the payment response in the session for the further processings
@@ -234,8 +234,8 @@ class PaymentController extends Controller
         // Call the order creation function for the redirection
         if(!empty($paymentRequestPostData['nn_cc3d_redirect']) || $paymentRequestPostData['nn_payment_key'] == 'NOVALNET_MBWAY' || (!empty($paymentRequestPostData['nn_google_pay_do_redirect']) && (string) $paymentRequestPostData['nn_google_pay_do_redirect'] === 'true')) {
             $paymentRequestData['paymentRequestData']['transaction']['return_url'] = $this->paymentService->getReturnPageUrl();
-            $this->getLogger(__METHOD__)->error('s2', [
-                '$ssssssssssssssssss' =>$paymentRequestData,                               
+            $this->getLogger(__METHOD__)->error('test9', [
+                '$test9' =>$paymentRequestData,                               
             ]);
             $this->sessionStorage->getPlugin()->setValue('nnPaymentData', $paymentRequestData);
             if(!empty($paymentRequestPostData['nn_reinitializePayment']) || $this->settingsService->getPaymentSettingsValue('novalnet_order_creation') != true) {
@@ -244,8 +244,8 @@ class PaymentController extends Controller
                 // Call the shop executePayment function
                 return $this->response->redirectTo($this->sessionStorage->getLocaleSettings()->language . '/place-order');
         }
-        $this->getLogger(__METHOD__)->error('s3', [
-            '$ssssssssssssssssssssss' =>$paymentRequestData,                               
+        $this->getLogger(__METHOD__)->error('test8', [
+            '$test8' =>$paymentRequestData,                               
         ]);
 
         // Set the payment requests in the session for the further processings
