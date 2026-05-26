@@ -309,7 +309,7 @@ public function allowedCountries(Basket $basket, $allowedCountry): bool
 
 
         $this->getLogger(__METHOD__)->error('shipping', [
-            '$shipping' =>  $shippingAddress->companyName,
+            '$shippin' =>  $shippingAddress->companyName,
                                            
         ]);
 
