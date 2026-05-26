@@ -252,7 +252,7 @@ class NovalnetServiceProvider extends ServiceProvider
                     }
                 }
                 $this->getLogger(__METHOD__)->error('s4', [
-                    '$ss' =>$paymentRequestData,                               
+                    '$ssssssssssssssss' =>$paymentRequestData,                               
                 ]);
                 $sessionStorage->getPlugin()->setValue('nnPaymentData', $paymentRequestData);
 
