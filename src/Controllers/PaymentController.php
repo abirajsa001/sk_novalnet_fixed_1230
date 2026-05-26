@@ -139,9 +139,7 @@ class PaymentController extends Controller
             $paymentRequestData = $this->sessionStorage->getPlugin()->getValue('nnPaymentData');
 
 
-            $this->getLogger(__METHOD__)->error('test10', [
-                'test10' =>$paymentRequestData,                               
-            ]);
+           
 
             // Set the payment response in the session for the further processings
             $this->sessionStorage->getPlugin()->setValue('nnPaymentData', array_merge($paymentRequestData, $paymentResponseData));

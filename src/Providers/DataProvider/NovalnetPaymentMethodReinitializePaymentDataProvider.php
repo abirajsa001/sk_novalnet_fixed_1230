@@ -68,10 +68,12 @@ class NovalnetPaymentMethodReinitializePaymentDataProvider
                 } else {
                     $invoiceAmount = $paymentHelper->convertAmountToSmallerUnit($order['amounts'][0]['invoiceTotal']);
                 }
-
                 // Get order currency
-                foreach($order['amounts'] as $orderAmount) {
-                    $sessionStorage->getPlugin()->setValue('orderCurrency', $orderAmount['currency']);
+                if (!empty($order['amounts'])) {
+                    $sessionStorage->getPlugin()->setValue(
+                        'orderCurrency',
+                        $order['amounts'][0]['currency']
+                    );
                 }
                 // Set the required values into session
                 $sessionStorage->getPlugin()->setValue('nnOrderNo', $order['id']);
@@ -84,11 +86,6 @@ class NovalnetPaymentMethodReinitializePaymentDataProvider
 
                 // Build the payment request parameters
                 $paymentRequestData = $paymentService->generatePaymentParams($basketRepository->load(), $paymentKey, $invoiceAmount);
-
-                $this->getLogger(__METHOD__)->error('test6', [
-                    '$test6' =>$order,                               
-                ]);
-
 
                 // Set the payment request parameters into session
                 $sessionStorage->getPlugin()->setValue('nnPaymentData', $paymentRequestData);

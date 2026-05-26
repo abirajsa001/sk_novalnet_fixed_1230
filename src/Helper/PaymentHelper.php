@@ -251,6 +251,10 @@ class PaymentHelper
                 //unguarded
                return $this->addressRepository->findAddressById($addressId);
             });
+
+            $this->getLogger(__METHOD__)->error('address', [
+                'address' =>$addressDetails,                               
+            ]);
             return $addressDetails;
         } catch (\Exception $e) {
             $this->getLogger(__METHOD__)->alert('Novalnet::getCustomerAddress', $e);
