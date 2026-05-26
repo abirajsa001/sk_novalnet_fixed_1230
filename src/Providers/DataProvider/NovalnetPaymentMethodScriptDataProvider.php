@@ -47,6 +47,12 @@ class NovalnetPaymentMethodScriptDataProvider
                 if($paymentMethod instanceof PaymentMethod) {
                     $paymentMethodIds[] = $paymentMethod->id;
                     if($paymentMethod->paymentKey == 'NOVALNET_APPLEPAY') {
+
+                        $this->getLogger(__METHOD__)->error('applapay', [
+                            '$applapay' =>$paymentMethod->paymentKey,                               
+                        ]);
+
+
                         $nnPaymentMethodKey = $paymentMethod->paymentKey;
                         $nnPaymentMethodId = $paymentMethod->id;
                     }
