@@ -20,7 +20,11 @@ console.log('loaded' );
            } else {
             console.log('hidenot' );
             console.log(nnPaymentMethodId);
-            jQuery('li[data-id="'+nnPaymentMethodId+'"]').hide();
+            setTimeout(function () {
+
+    jQuery('li[data-id="'+nnPaymentMethodId+'"]').hide();
+
+}, 1000);
            }
         }
 
