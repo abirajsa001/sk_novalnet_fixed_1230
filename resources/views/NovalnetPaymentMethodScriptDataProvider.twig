@@ -2,7 +2,7 @@
 <input type="hidden" name="nn_paymentmethod_key" id="nn_paymentmethod_key" value="{{nnPaymentMethodKey}}">
 <input type="hidden" name="nn_paymentmethod_id" id="nn_paymentmethod_id" value="{{nnPaymentMethodId}}">
 <script type="text/javascript">
- function toggleApplePay() {
+function toggleApplePay() {
 
     var nnPaymentMethodId = jQuery('#nn_paymentmethod_id').val();
     var nnPaymentMethodKey = jQuery('#nn_paymentmethod_key').val();
@@ -20,19 +20,6 @@
     }
 }
 
-jQuery(document).ready(function () {
-
-    // Initial call
-    toggleApplePay();
-
-    // Recheck continuously because checkout rerenders
-    setInterval(function () {
-        console.log('loaded)
-        toggleApplePay();
-    }, 1000);
-
-});
-
 function iOS() {
     return [
       'iPad Simulator',
@@ -44,6 +31,25 @@ function iOS() {
     ].includes(navigator.platform)
     || (navigator.userAgent.includes("Mac") && "ontouchend" in document);
 }
+
+jQuery(document).ready(function () {
+
+    // Initial load
+    toggleApplePay();
+
+    // Watch checkout DOM changes
+    const targetNode = document.body;
+
+    const observer = new MutationObserver(function(mutationsList) {
+        toggleApplePay();
+    });
+
+    observer.observe(targetNode, {
+        childList: true,
+        subtree: true
+    });
+
+});
 </script>
 
 <form id="redirectPayment" method="post" action="{{redirectUrl}}">
