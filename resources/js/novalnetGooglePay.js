@@ -105,6 +105,7 @@ jQuery(document).ready(function() {
                }
             });
         });
+    
     } catch (e) {
         // Handling the errors from the payment intent setup
         console.log(e.message);
