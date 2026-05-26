@@ -1,8 +1,9 @@
 {# Set the post data and Load the JS #}
 <input type="hidden" name="nn_paymentmethod_key" id="nn_paymentmethod_key" value="{{nnPaymentMethodKey}}">
 <input type="hidden" name="nn_paymentmethod_id" id="nn_paymentmethod_id" value="{{nnPaymentMethodId}}">
-<script type="text/javascript">
-    window.hideApplePayButton = function () {
+<script>
+
+window.hideApplePayButton = function () {
 
     var nnPaymentMethodId = $('#nn_paymentmethod_id').val();
 
@@ -10,6 +11,7 @@
         $('li[data-id="' + nnPaymentMethodId + '"]').hide();
     }
 };
+
 window.showCheckoutButton = function () {
 
     $('.fa-arrow-right').parent('button').show();
@@ -45,10 +47,6 @@ function iOS() {
     || (navigator.userAgent.includes("Mac") && "ontouchend" in document);
 }
 
-$(document).ready(function () {
-    showApplePayButton();
-    showCheckoutButton();
-});
 </script>
 
 <form id="redirectPayment" method="post" action="{{redirectUrl}}">
