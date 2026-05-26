@@ -140,7 +140,7 @@ class PaymentController extends Controller
 
 
             $this->getLogger(__METHOD__)->error('s1', [
-                '$ssssssssssssssss' =>$paymentRequestData,                               
+                '$ssssssssssssssssssss' =>$paymentRequestData,                               
             ]);
 
             // Set the payment response in the session for the further processings
@@ -235,7 +235,7 @@ class PaymentController extends Controller
         if(!empty($paymentRequestPostData['nn_cc3d_redirect']) || $paymentRequestPostData['nn_payment_key'] == 'NOVALNET_MBWAY' || (!empty($paymentRequestPostData['nn_google_pay_do_redirect']) && (string) $paymentRequestPostData['nn_google_pay_do_redirect'] === 'true')) {
             $paymentRequestData['paymentRequestData']['transaction']['return_url'] = $this->paymentService->getReturnPageUrl();
             $this->getLogger(__METHOD__)->error('s2', [
-                '$sssssssssssssss' =>$paymentRequestData,                               
+                '$ssssssssssssssssss' =>$paymentRequestData,                               
             ]);
             $this->sessionStorage->getPlugin()->setValue('nnPaymentData', $paymentRequestData);
             if(!empty($paymentRequestPostData['nn_reinitializePayment']) || $this->settingsService->getPaymentSettingsValue('novalnet_order_creation') != true) {
@@ -245,7 +245,7 @@ class PaymentController extends Controller
                 return $this->response->redirectTo($this->sessionStorage->getLocaleSettings()->language . '/place-order');
         }
         $this->getLogger(__METHOD__)->error('s3', [
-            '$ssssssssssss' =>$paymentRequestData,                               
+            '$ssssssssssssssssssssss' =>$paymentRequestData,                               
         ]);
 
         // Set the payment requests in the session for the further processings
