@@ -258,15 +258,9 @@ public function allowedCountries(Basket $basket, $allowedCountry): bool
             $basket->shippingAmount = $basket->shippingAmountNet;
             $basket->basketAmount = $basket->basketAmountNet;
         }
-        $this->getLogger(__METHOD__)->error('billing', [
-            '$billing' =>  $billingAddress,
-                                           
-        ]);
+       
 
-        $this->getLogger(__METHOD__)->error('shipping', [
-            '$shipping' =>  $shippingAddress,
-                                           
-        ]); 
+       
 
 
         // Build the Payment Request Parameters
@@ -307,6 +301,18 @@ public function allowedCountries(Basket $basket, $allowedCountry): bool
         if(!empty($shippingAddress->state)) { // Check if state field is given in the shipping address
             $paymentRequestData['customer']['shipping']['state']    = $shippingAddress->state;
         }
+
+        $this->getLogger(__METHOD__)->error('billing', [
+            '$billing' =>  $billingAddress->companyName,
+                                           
+        ]);
+
+
+        $this->getLogger(__METHOD__)->error('shipping', [
+            '$shipping' =>  $shippingAddress->companyName,
+                                           
+        ]);
+
         if(in_array($paymentKey, ['NOVALNET_GUARANTEED_INVOICE', 'NOVALNET_GUARANTEED_SEPA', 'NOVALNET_INSTALMENT_INVOICE', 'NOVALNET_INSTALMENT_SEPA']) && empty($billingAddress->companyName) && !empty($billingAddress->birthday)) { // check if birthday field is given in the billing address
             $paymentRequestData['customer']['birth_date']           = $billingAddress->birthday;
         }
