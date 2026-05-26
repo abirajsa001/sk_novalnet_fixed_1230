@@ -156,6 +156,11 @@ class BookEventProcedure
             }
             $orderData = pluginApp(OrderRepositoryContract::class)
             ->findOrderById($order->id);
+
+            $this->getLogger(__METHOD__)->error('housenodetails', [
+                '$housenodetails' =>  $orderData,
+                                               
+            ]);
     
             $billingAddress  = $orderData->billingAddress;
             $shippingAddress = $orderData->deliveryAddress;
