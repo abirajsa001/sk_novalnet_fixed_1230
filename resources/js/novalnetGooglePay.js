@@ -1,4 +1,4 @@
-window.renderGooglePayButton = function () {
+jQuery(document).ready(function() {
     // Load the Google Pay button
     try {
         // Load the payment instances
@@ -105,12 +105,8 @@ window.renderGooglePayButton = function () {
                }
             });
         });
-    
     } catch (e) {
         // Handling the errors from the payment intent setup
         console.log(e.message);
     }
-};
-$(document).ready(function () {
-    renderGooglePayButton();
 });
