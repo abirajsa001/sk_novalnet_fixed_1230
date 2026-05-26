@@ -6,10 +6,6 @@
         {# Define variables #}
         var nnPaymentMethodId = jQuery('#nn_paymentmethod_id').val();
         var nnPaymentMethodKey = jQuery('#nn_paymentmethod_key').val();
-
-
-
-console.log('loaded' );
         {# Display the Novalnet ApplePay payment if it is IOS Device #}
         if(nnPaymentMethodKey == 'NOVALNET_APPLEPAY') {
             console.log('applapay' );
@@ -19,18 +15,12 @@ console.log('loaded' );
             jQuery('li[data-id="'+nnPaymentMethodId+'"]').show();
            } else {
             console.log('hidenot' );
-            console.log(nnPaymentMethodId);
-            setTimeout(function () {
-
-    jQuery('li[data-id="'+nnPaymentMethodId+'"]').hide();
-
-}, 1000);
+            jQuery('li[data-id="'+nnPaymentMethodId+'"]').hide();
            }
         }
 
         {# Call the Direct payment methods #}
         jQuery("#nn_direct_payment_process").click(function () {
-            console.log('google' );
             jQuery.get("/payment/novalnet/directPaymentProcess", function(data) {
                 window.location = data;
             });
@@ -38,14 +28,13 @@ console.log('loaded' );
 
         {# Call the form payment methods #}
         jQuery('#nn_form_payment_process').click(function() {
-            console.log('nn' );
+         
             jQuery("[id^='nnReinitPaymentMethod-']").hide();
             jQuery('#novalnetPaymentForm').show();
         });
         
         {# Call the redirect payment methods #}
         jQuery('#nn_redirect_payment_process').click(function() {
-            console.log('lll' );
             $("#redirectPayment").submit();
         });
 
