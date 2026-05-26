@@ -22,15 +22,14 @@
 
 jQuery(document).ready(function () {
 
+    // Initial call
     toggleApplePay();
 
-    $(document).ajaxComplete(function () {
-         console.log('AJAX COMPLETED');
+    // Recheck continuously because checkout rerenders
+    setInterval(function () {
+        console.log('loaded)
         toggleApplePay();
-
-    });
-
-    
+    }, 1000);
 
 });
 
