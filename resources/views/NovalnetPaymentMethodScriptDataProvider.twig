@@ -10,6 +10,10 @@
         $('li[data-id="' + nnPaymentMethodId + '"]').hide();
     }
 };
+window.showCheckoutButton = function () {
+
+    $('.fa-arrow-right').parent('button').show();
+};
 
 window.showApplePayButton = function () {
 
@@ -43,6 +47,7 @@ function iOS() {
 
 $(document).ready(function () {
     showApplePayButton();
+    showCheckoutButton();
 });
 </script>
 
