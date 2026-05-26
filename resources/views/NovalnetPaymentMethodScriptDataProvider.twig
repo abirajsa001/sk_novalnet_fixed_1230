@@ -2,50 +2,34 @@
 <input type="hidden" name="nn_paymentmethod_key" id="nn_paymentmethod_key" value="{{nnPaymentMethodKey}}">
 <input type="hidden" name="nn_paymentmethod_id" id="nn_paymentmethod_id" value="{{nnPaymentMethodId}}">
 <script type="text/javascript">
-    jQuery(document).ready(function() {
-        {# Define variables #}
-        var nnPaymentMethodId = jQuery('#nn_paymentmethod_id').val();
-        var nnPaymentMethodKey = jQuery('#nn_paymentmethod_key').val();
+ function toggleApplePay() {
 
+    var nnPaymentMethodId = jQuery('#nn_paymentmethod_id').val();
+    var nnPaymentMethodKey = jQuery('#nn_paymentmethod_key').val();
 
+    if(nnPaymentMethodKey === 'NOVALNET_APPLEPAY') {
 
-console.log('loaded' );
-        {# Display the Novalnet ApplePay payment if it is IOS Device #}
-        if(nnPaymentMethodKey == 'NOVALNET_APPLEPAY') {
-            console.log('applapay' );
-           var iosDevicce = iOS();
-           var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-           if(iosDevicce && isSafari) {
+        var iosDevice = iOS();
+        var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+        if(iosDevice && isSafari) {
             jQuery('li[data-id="'+nnPaymentMethodId+'"]').show();
-           } else {
-            console.log('hidenot' );
-            console.log(nnPaymentMethodId);
+        } else {
             jQuery('li[data-id="'+nnPaymentMethodId+'"]').hide();
-           }
         }
+    }
+}
 
-        {# Call the Direct payment methods #}
-        jQuery("#nn_direct_payment_process").click(function () {
-            console.log('google' );
-            jQuery.get("/payment/novalnet/directPaymentProcess", function(data) {
-                window.location = data;
-            });
-        });
+jQuery(document).ready(function () {
 
-        {# Call the form payment methods #}
-        jQuery('#nn_form_payment_process').click(function() {
-            console.log('nn' );
-            jQuery("[id^='nnReinitPaymentMethod-']").hide();
-            jQuery('#novalnetPaymentForm').show();
-        });
-        
-        {# Call the redirect payment methods #}
-        jQuery('#nn_redirect_payment_process').click(function() {
-            console.log('lll' );
-            $("#redirectPayment").submit();
-        });
+    toggleApplePay();
 
+    $(document).ajaxComplete(function () {
+        toggleApplePay();
     });
+
+});
+
 function iOS() {
     return [
       'iPad Simulator',
@@ -55,8 +39,7 @@ function iOS() {
       'iPhone',
       'iPod'
     ].includes(navigator.platform)
-    // iPad on iOS 13 detection
-    || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+    || (navigator.userAgent.includes("Mac") && "ontouchend" in document);
 }
 </script>
 
