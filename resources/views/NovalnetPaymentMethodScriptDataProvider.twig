@@ -2,23 +2,32 @@
 <input type="hidden" name="nn_paymentmethod_key" id="nn_paymentmethod_key" value="{{nnPaymentMethodKey}}">
 <input type="hidden" name="nn_paymentmethod_id" id="nn_paymentmethod_id" value="{{nnPaymentMethodId}}">
 <script type="text/javascript">
-function toggleApplePay() {
+window.hideApplePayButton = function () {
 
-    var nnPaymentMethodId = jQuery('#nn_paymentmethod_id').val();
-    var nnPaymentMethodKey = jQuery('#nn_paymentmethod_key').val();
+    var nnPaymentMethodId = $('#nn_paymentmethod_id').val();
 
-    if(nnPaymentMethodKey === 'NOVALNET_APPLEPAY') {
+    if (nnPaymentMethodId) {
+        $('li[data-id="' + nnPaymentMethodId + '"]').hide();
+    }
+};
+
+window.showApplePayButton = function () {
+
+    var nnPaymentMethodId = $('#nn_paymentmethod_id').val();
+    var nnPaymentMethodKey = $('#nn_paymentmethod_key').val();
+
+    if (nnPaymentMethodKey === 'NOVALNET_APPLEPAY') {
 
         var iosDevice = iOS();
         var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-        if(iosDevice && isSafari) {
-            jQuery('li[data-id="'+nnPaymentMethodId+'"]').show();
+        if (iosDevice && isSafari) {
+            $('li[data-id="' + nnPaymentMethodId + '"]').show();
         } else {
-            jQuery('li[data-id="'+nnPaymentMethodId+'"]').hide();
+            $('li[data-id="' + nnPaymentMethodId + '"]').hide();
         }
     }
-}
+};
 
 function iOS() {
     return [
@@ -32,23 +41,8 @@ function iOS() {
     || (navigator.userAgent.includes("Mac") && "ontouchend" in document);
 }
 
-jQuery(document).ready(function () {
-
-    // Initial load
-    toggleApplePay();
-
-    // Watch checkout DOM changes
-    const targetNode = document.body;
-
-    const observer = new MutationObserver(function(mutationsList) {
-        toggleApplePay();
-    });
-
-    observer.observe(targetNode, {
-        childList: true,
-        subtree: true
-    });
-
+$(document).ready(function () {
+    showApplePayButton();
 });
 </script>
 
