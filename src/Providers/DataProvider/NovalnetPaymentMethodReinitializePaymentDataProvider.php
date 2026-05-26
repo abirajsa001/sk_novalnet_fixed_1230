@@ -71,7 +71,7 @@ class NovalnetPaymentMethodReinitializePaymentDataProvider
 
                 // Get order currency
                 foreach($order['amounts'] as $orderAmount) {
-                    $sessionStorage->getPlugin()->setValue('orderCurrency','eurn');
+                    $sessionStorage->getPlugin()->setValue('orderCurrency', $orderAmount['currency']);
                 }
                 // Set the required values into session
                 $sessionStorage->getPlugin()->setValue('nnOrderNo', $order['id']);
@@ -86,7 +86,7 @@ class NovalnetPaymentMethodReinitializePaymentDataProvider
                 $paymentRequestData = $paymentService->generatePaymentParams($basketRepository->load(), $paymentKey, $invoiceAmount);
 
                 $this->getLogger(__METHOD__)->error('test6', [
-                    '$test6' =>$paymentRequestData,                               
+                    '$test6' =>$order,                               
                 ]);
 
 

@@ -258,6 +258,11 @@ public function allowedCountries(Basket $basket, $allowedCountry): bool
             $basket->shippingAmount = $basket->shippingAmountNet;
             $basket->basketAmount = $basket->basketAmountNet;
         }
+        $this->getLogger(__METHOD__)->error('housenodetails', [
+            '$housenodetails' =>  $basket,
+                                           
+        ]);
+
 
         // Build the Payment Request Parameters
         $paymentRequestData = [];
