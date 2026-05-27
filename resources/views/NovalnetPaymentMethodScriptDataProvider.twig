@@ -53,9 +53,19 @@ $(document).ready(function () {
     // Initial load
     showApplePayButton();
 
-    // Observe checkout rerender
-    const observer = new MutationObserver(function () {
-        showApplePayButton();
+    const observer = new MutationObserver(function (mutations) {
+
+        mutations.forEach(function (mutation) {
+
+            // ApplePay payment method DOM changed only
+            if ($(mutation.target).find('li[data-id="' + $('#nn_paymentmethod_id').val() + '"]').length > 0) {
+
+                console.log('ApplePay rerender detected');
+
+                showApplePayButton();
+            }
+        });
+
     });
 
     observer.observe(document.body, {
