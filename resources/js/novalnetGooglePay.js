@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+window.renderGooglePayButton = function () {
     console.log('notloaded');
     // Load the Google Pay button
     try {
@@ -110,4 +110,25 @@ jQuery(document).ready(function() {
         // Handling the errors from the payment intent setup
         console.log(e.message);
     }
+};
+
+
+$(document).ready(function () {
+
+
+    renderGooglePayButton();
+
+    const observer = new MutationObserver(function () {
+
+       
+            renderGooglePayButton();
+        
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+
 });
+
