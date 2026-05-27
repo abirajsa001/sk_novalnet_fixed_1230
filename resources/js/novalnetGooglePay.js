@@ -1,4 +1,5 @@
 jQuery(document).ready(function() {
+    console.log('notloaded');
     // Load the Google Pay button
     try {
         // Load the payment instances
