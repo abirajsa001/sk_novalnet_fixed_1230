@@ -71,31 +71,7 @@ $(document).ready(function () {
         });
 
     });
-    
-    
-      {# Call the Direct payment methods #}
-        jQuery("#nn_direct_payment_process").click(function () {
-            jQuery.get("/payment/novalnet/directPaymentProcess", function(data) {
-                window.location = data;
-            });
-        });
-
-        {# Call the form payment methods #}
-        jQuery('#nn_form_payment_process').click(function() {
-            jQuery("[id^='nnReinitPaymentMethod-']").hide();
-            jQuery('#novalnetPaymentForm').show();
-        });
-        
-        {# Call the redirect payment methods #}
-        jQuery('#nn_redirect_payment_process').click(function() {
-            $("#redirectPayment").submit();
-        });
-
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
-      
+  
 
 });
 </script>
