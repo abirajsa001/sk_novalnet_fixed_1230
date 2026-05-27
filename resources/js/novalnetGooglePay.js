@@ -1,5 +1,4 @@
-window.renderGooglePayButton = function () {
-    console.log('notloaded');
+jQuery(document).ready(function() {
     // Load the Google Pay button
     try {
         // Load the payment instances
@@ -110,34 +109,4 @@ window.renderGooglePayButton = function () {
         // Handling the errors from the payment intent setup
         console.log(e.message);
     }
-};
-
-
-$(document).ready(function () {
-
-    renderGooglePayButton();
-
-    const observer = new MutationObserver(function () {
-
-        if ($('#nn_google_pay').length > 0) {
-
-            console.log('googlepay rerender');
-
-            $('#nn_google_pay').empty();
-
-            renderGooglePayButton();
-        }
-    });
-
-    const targetNode = document.querySelector('#nn_google_pay_button');
-
-    if (targetNode) {
-
-        observer.observe(targetNode, {
-            childList: true,
-            subtree: true
-        });
-    }
-
 });
-
