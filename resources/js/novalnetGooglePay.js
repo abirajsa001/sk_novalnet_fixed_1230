@@ -118,17 +118,9 @@ $(document).ready(function () {
 
     renderGooglePayButton();
 
-    const observer = new MutationObserver(function () {
+  
 
-       
-            renderGooglePayButton();
-        
-    });
-
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
+   
 
 });
 
