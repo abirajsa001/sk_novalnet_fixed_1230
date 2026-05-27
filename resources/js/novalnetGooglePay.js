@@ -115,12 +115,7 @@ window.renderGooglePayButton = function () {
 
 $(document).ready(function () {
 
-
     renderGooglePayButton();
-
-  
-
-   
 
 });
 

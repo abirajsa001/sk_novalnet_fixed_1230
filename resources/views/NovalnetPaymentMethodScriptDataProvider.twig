@@ -58,16 +58,12 @@ $(document).ready(function () {
 
         mutations.forEach(function (mutation) {
 
-            if (nnPaymentMethodKey === 'NOVALNET_APPLEPAY') {
-
                 if ($(mutation.target).find(
                     'li[data-id="' + $('#nn_paymentmethod_id').val() + '"]'
                 ).length > 0) {
 
                     showApplePayButton();
                 }
-            }
-
         });
 
     });
