@@ -1,3 +1,6 @@
+{# Set the post data and Load the JS #}
+<input type="hidden" name="nn_paymentmethod_key" id="nn_paymentmethod_key" value="{{nnPaymentMethodKey}}">
+<input type="hidden" name="nn_paymentmethod_id" id="nn_paymentmethod_id" value="{{nnPaymentMethodId}}">
 <script type="text/javascript">
 
 window.hideApplePayButton = function () {
@@ -56,7 +59,6 @@ $(document).ready(function () {
         mutations.forEach(function (mutation) {
 
             if (nnPaymentMethodKey === 'NOVALNET_APPLEPAY') {
-                console.log('applepay not dispay');
 
                 if ($(mutation.target).find(
                     'li[data-id="' + $('#nn_paymentmethod_id').val() + '"]'
@@ -96,5 +98,8 @@ $(document).ready(function () {
       
 
 });
-
 </script>
+<form id="redirectPayment" method="post" action="{{redirectUrl}}">
+<input type="hidden"  value="1" name="nnReinitiatePayment" id="nnReinitiatePayment">
+<input type="hidden"  value="{{redirectUrl}}" name="nnRedirectPayment" id="nnRedirectPayment">
+</form>
