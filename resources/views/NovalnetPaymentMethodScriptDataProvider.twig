@@ -1,6 +1,3 @@
-{# Set the post data and Load the JS #}
-<input type="hidden" name="nn_paymentmethod_key" id="nn_paymentmethod_key" value="{{nnPaymentMethodKey}}">
-<input type="hidden" name="nn_paymentmethod_id" id="nn_paymentmethod_id" value="{{nnPaymentMethodId}}">
 <script type="text/javascript">
 
 window.hideApplePayButton = function () {
@@ -18,7 +15,7 @@ window.showCheckoutButton = function () {
 };
 
 window.showApplePayButton = function () {
-   
+
     var nnPaymentMethodId = $('#nn_paymentmethod_id').val();
     var nnPaymentMethodKey = $('#nn_paymentmethod_key').val();
 
@@ -48,6 +45,9 @@ function iOS() {
 }
 
 $(document).ready(function () {
+ {# Define variables #}
+        var nnPaymentMethodId = jQuery('#nn_paymentmethod_id').val();
+        var nnPaymentMethodKey = jQuery('#nn_paymentmethod_key').val();
 
     showApplePayButton();
 
@@ -55,24 +55,46 @@ $(document).ready(function () {
 
         mutations.forEach(function (mutation) {
 
-            // ApplePay payment method DOM changed only
-            if ($(mutation.target).find('li[data-id="' + $('#nn_paymentmethod_id').val() + '"]').length > 0) {
+            if (nnPaymentMethodKey === 'NOVALNET_APPLEPAY') {
+                console.log('applepay not dispay');
 
-                showApplePayButton();
+                if ($(mutation.target).find(
+                    'li[data-id="' + $('#nn_paymentmethod_id').val() + '"]'
+                ).length > 0) {
+
+                    showApplePayButton();
+                }
             }
+
         });
 
     });
+    
+    
+      {# Call the Direct payment methods #}
+        jQuery("#nn_direct_payment_process").click(function () {
+            jQuery.get("/payment/novalnet/directPaymentProcess", function(data) {
+                window.location = data;
+            });
+        });
+
+        {# Call the form payment methods #}
+        jQuery('#nn_form_payment_process').click(function() {
+            jQuery("[id^='nnReinitPaymentMethod-']").hide();
+            jQuery('#novalnetPaymentForm').show();
+        });
+        
+        {# Call the redirect payment methods #}
+        jQuery('#nn_redirect_payment_process').click(function() {
+            $("#redirectPayment").submit();
+        });
 
     observer.observe(document.body, {
         childList: true,
         subtree: true
     });
+      
 
 });
 
 </script>
-<form id="redirectPayment" method="post" action="{{redirectUrl}}">
-<input type="hidden"  value="1" name="nnReinitiatePayment" id="nnReinitiatePayment">
-<input type="hidden"  value="{{redirectUrl}}" name="nnRedirectPayment" id="nnRedirectPayment">
-</form>
