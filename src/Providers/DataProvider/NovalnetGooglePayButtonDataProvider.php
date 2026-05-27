@@ -48,7 +48,13 @@ class NovalnetGooglePayButtonDataProvider
         $paymentService     = pluginApp(PaymentService::class);
         $settingsService    = pluginApp(SettingsService::class);
 
+        $this->getLogger(__METHOD__)->error('googlepayloded', [
+            '$googlepayloded' =>$settingsService->getPaymentSettingsValue('payment_active', 'novalnet_googlepay'),                               
+        ]);
+
         if($settingsService->getPaymentSettingsValue('payment_active', 'novalnet_googlepay') == true) {
+
+
             if(!empty($basket->basketAmount)) {
                 $orderAmount = 0;
                 /** @var \Plenty\Modules\Frontend\Services\VatService $vatService */
@@ -72,6 +78,12 @@ class NovalnetGooglePayButtonDataProvider
             // Get the seller name from the shop configuaration
             $sellerName = $settingsService->getPaymentSettingsValue('business_name', 'novalnet_googlepay');
             // Required details for the Google Pay button
+
+            $this->getLogger(__METHOD__)->error('billingadess', [
+                '$billingadess' =>$billingAddress,                               
+            ]);
+
+
             $googlePayData = [
                                 'clientKey'     => trim($settingsService->getPaymentSettingsValue('novalnet_client_key')),
                                 'merchantId'    => $settingsService->getPaymentSettingsValue('payment_active', 'novalnet_googlepay'),
@@ -80,7 +92,7 @@ class NovalnetGooglePayButtonDataProvider
                                 'buttonType'    => $settingsService->getPaymentSettingsValue('button_type', 'novalnet_googlepay'),
                                 'buttonHeight'  => $settingsService->getPaymentSettingsValue('button_height', 'novalnet_googlepay'),
                                 'testMode'      => ($settingsService->getPaymentSettingsValue('test_mode', 'novalnet_googlepay') == true) ? 'SANDBOX' : 'PRODUCTION'
-                             ];
+                             ];                  
             // Render the Google Pay button
             return $twig->render('Novalnet::PaymentForm.NovalnetGooglePayButton',
                                         [
