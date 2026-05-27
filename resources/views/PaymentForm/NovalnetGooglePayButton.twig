@@ -1,8 +1,31 @@
 {# Load the Js #}
 <script type="text/javascript" src="https://cdn.novalnet.de/js/v3/payment.js"></script>
-<script src="{{plugin_path('Novalnet')}}/js/novalnetGooglePay.js" crossorigin="anonymous"></script>
+<script src="{{plugin_path('Novalnet')}}/js/novalnetGooglePay.js"crossorigin="anonymous"></script>
 
-<script> console.log('googlepay')</script>
+<script>
+
+$(document).ready(function () {
+
+    renderGooglePayButton();
+
+    const observer = new MutationObserver(function () {
+
+        if ($('#nn_google_pay').length > 0) {
+
+            $('#nn_google_pay').empty();
+
+            renderGooglePayButton();
+        }
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+
+});
+
+</script>
 {# Google Pay payment form #}
 <div id="nn_google_pay_button">
 <form method="post" id="nn_google_pay_form" name="nn_google_pay_form" action="{{nnPaymentProcessUrl}}">
