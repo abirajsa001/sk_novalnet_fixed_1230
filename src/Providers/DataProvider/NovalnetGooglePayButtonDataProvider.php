@@ -17,14 +17,15 @@ use Plenty\Modules\Basket\Contracts\BasketRepositoryContract;
 use Plenty\Modules\Frontend\Session\Storage\Contracts\FrontendSessionStorageFactoryContract;
 use Plenty\Modules\Order\Shipping\Countries\Contracts\CountryRepositoryContract;
 use Plenty\Modules\Helper\Services\WebstoreHelper;
-
+use Plenty\Plugin\Log\Loggable;
 /**
  * Class NovalnetGooglePayButtonDataProvider
  *
  * @package Novalnet\Providers\DataProvider
  */
 class NovalnetGooglePayButtonDataProvider
-{
+{ 
+    use Loggable;
     /**
      * Display the Google Pay button
      *
