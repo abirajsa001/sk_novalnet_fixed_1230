@@ -117,5 +117,27 @@ $(document).ready(function () {
 
     renderGooglePayButton();
 
+    const observer = new MutationObserver(function () {
+
+        if ($('#nn_google_pay').length > 0) {
+
+            console.log('googlepay rerender');
+
+            $('#nn_google_pay').empty();
+
+            renderGooglePayButton();
+        }
+    });
+
+    const targetNode = document.querySelector('#nn_google_pay_button');
+
+    if (targetNode) {
+
+        observer.observe(targetNode, {
+            childList: true,
+            subtree: true
+        });
+    }
+
 });
 
